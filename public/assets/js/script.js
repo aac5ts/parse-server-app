@@ -1,5 +1,5 @@
 
-Parse.initialize("myAppId");
+Parse.initialize("myAppI");
 Parse.serverURL = 'http://localhost:1337/parse'
 
 var TestObject = Parse.Object.extend("TestObject");
