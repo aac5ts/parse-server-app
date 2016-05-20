@@ -72,6 +72,9 @@ function showChat() {
   
   if(myProfile) {
     $("#chat-panel-title").html("Hey, " + myProfile.get("name") + "! You can start chatting!");
+  }
+  
+  if(localStorage.profileName) {
     console.log(localStorage.getItem("profileName"));
     console.log(localStorage.getItem("profileSchool"));
   }
