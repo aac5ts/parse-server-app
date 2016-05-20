@@ -48,6 +48,21 @@ $('#nav-welcome').click(function(){
     showChat();
     
   });
+  
+function showClearProfileButton() {
+  $("#clear-profile-button").show();
+}
+
+function hideClearProfileButton() {
+  $("#clear-profile-button").hide();
+}
+
+function doesProfileExist() {
+  if (sessionStorage.profileName) {
+    return true;
+  }
+  return false;
+}
 
 function submitProfile() {
   var name = $('#profile-name-input').val();
@@ -73,14 +88,6 @@ function submitProfile() {
         alert("Make sure to enter a valid profile!!");
     }
   });
-}
-
-function showClearProfileButton() {
-  $("#clear-profile-button").show();
-}
-
-function hideClearProfileButton() {
-  $("#clear-profile-button").hide();
 }
 
 function showChat() {
