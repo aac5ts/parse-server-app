@@ -1,4 +1,3 @@
-var myProfile;
 
 Parse.initialize("myAppId");
 Parse.serverURL = 'http://my-parse-app.herokuapp.com/parse'
@@ -55,7 +54,6 @@ function submitProfile() {
         $('#profile-name-input').val('');
         $('#profile-school-input').val('');
         
-        myProfile = profile;
         localStorage.setItem("profileName", name);
         localStorage.setItem("profileSchool", school);
         
@@ -70,13 +68,9 @@ function submitProfile() {
 function showChat() {
   $("#chat-history-table-body").empty();
   
-  if(myProfile) {
-    $("#chat-panel-title").html("Hey, " + myProfile.get("name") + "! You can start chatting!");
-  }
-  
   if(localStorage.profileName) {
-    console.log(localStorage.getItem("profileName"));
-    console.log(localStorage.getItem("profileSchool"));
+    $("#chat-panel-title").html("Hey, " + myProfile.get("name") + "! You can start chatting!");
+    console.log("Current Profile: " + localStorage.getItem("profileName") + " from " + ocalStorage.getItem("profileSchool"));
   }
   
    fetchMessages();
