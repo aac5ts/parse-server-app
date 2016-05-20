@@ -56,6 +56,8 @@ function submitProfile() {
         $('#profile-school-input').val('');
         
         myProfile = profile;
+        localStorage.setItem("profileName", name);
+        localStorage.setItem("profileSchool", school);
         
         showChat();
       },
@@ -70,6 +72,8 @@ function showChat() {
   
   if(myProfile) {
     $("#chat-panel-title").html("Hey, " + myProfile.get("name") + "! You can start chatting!");
+    console.log(localStorage.getItem("profileName"));
+    console.log(localStorage.getItem("profileSchool"));
   }
   
    fetchMessages();
