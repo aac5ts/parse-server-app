@@ -5,84 +5,120 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Backend as a Service Demo App</title>
+    <title>C1 SES Baas Demo</title>
 
     <!-- Bootstrap -->
     <link href="./public/assets/css/lib/bootstrap.min.css" rel="stylesheet">
-    <!-- Pure -->
+    <!-- Pure for test page -->
     <link href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css" rel="stylesheet">
+    <link href="./public/assets/css/pure.css" rel="stylesheet">
     <!-- My Stylesheets -->
     <link href="./public/assets/css/style.css" rel="stylesheet">
     
   </head>
   <body>
+   
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active link"><a id="nav-welcome">C1 Summit for Software Engineers May 2016</a></li>
+            <li class="link"><a id="nav-profiles">Profiles</a></li>
+            <li class="link"><a id="nav-chat">Group Chat</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
     
-    <div class="page-header">
-      <h1>Welcome! <small>Backend as a service demo</small></h1>
-    </div>
-    
-    <div class="container" id="signin" style="display:none" >
-
-      <form class="form-signin">
-        <h2 class="form-signin-heading">Sign in:</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      </form>
-      
-      <button class="btn btn-default btn-primary btn-block" type="submit">Or Register</button>
-
-
-    </div> <!-- /container -->
-    
-    <div class="container" id="register" style="display:none">
-      
-      <div class="row">
-        <div class="col-md-6">
+    <div id="welcome" class="container" role="main">
         
-          <form class="form-signin">
-            <h2 class="form-signin-heading">Register</h2>
-            <label for="inputEmail" class="sr-only">Email address</label>
-            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-            <label for="inputPassword" class="sr-only">Password</label>
-            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
-          </form>
-        
-        </div> <!--/col-md-6 -->
-        <div class="col-md-6">
-          <div id="camera" style="background-color:grey;width: 360px; height: 380px" class="col-center-block"></div>
-          <button class="btn btn-lg btn-primary btn-block" type="submit">Upload Profile Photo</button>
-        </div> <!--/col-md-6 -->
-      </div> <!-- /row -->
-
-    </div> <!-- /container -->
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Enter your profile information to start chatting!</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="input-group">
+                        <div class="form-group">
+                            <input type="text" placeholder="Name" id="profile-name-input">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="School" id="profile-school-input">
+                        </div>
+                        <div class="form-group">
+                            <button id="submit-profile-button" type="button">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- welcome -->
     
-    <div id="chat" class="container" style="display:none">
-      
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Enter your message...">
-        <span class="input-group-btn">
-          <button class="btn btn-default" type="button">Send!</button>
-        </span>
-      </div><!-- /input-group -->
-      
-      <ul class="list-group">
-        <li class="list-group-item">
-          <h4 class="list-group-item-heading">Alexandra says:</h4>
-          <p class="list-group-item-text">Hi! This is a test message.</p>
-        </li>
-      </ul> <!-- /list-group -->
-      
-    </div> <!-- /container -->
+    <div id="profiles" class="container" role="main" style="display:none">
+        
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Who's who at the Summit</h3>
+                </div>
+                <div class="panel-body">
+                    
+                    <table class="table" >
+                        <thead>
+                            <th>Emoji</th>
+                            <th>Name</th>
+                            <th>School</th>
+                        </thead>
+                        <tbody id="profile-table-body">
+                
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div> <!-- chat -->
+
+    <div id="chat" class="container" role="main" style="display:none">
+        
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="chat-panel-title">Hey, you! Enter a profile to start chatting!</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="input-group">
+                        <div class="form-group">
+                            <input type="text" placeholder="Say something!" id="chat-input">
+                            <button id="send-chat-button" type="button">Send</button>
+                        </div>
+                    </div>
+
+                    <table class="table" >
+                        <tbody id="chat-history-table-body">
+                
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div> <!-- chat -->
 
     <!-- Javascript Libraries -->
     <script src="./public/assets/js/lib/jquery.min.js"></script>
     <script src="./public/assets/js/lib/bootstrap.min.js"></script>
     
     <!-- Parse Javascript SDK -->
-    <script src="http://www.parsecdn.com/js/parse-1.2.13.min.js"></script>
+    <script type="text/javascript" src="./public/assets/js/lib/parse-latest.min.js"></script>
+    
+    <!-- My Javascript -->
+    <script src="./public/assets/js/app.js"></script>
+    
   </body>
 </html>
