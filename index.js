@@ -26,7 +26,7 @@ var api = new ParseServer({
 var dashboard = new ParseDashboard({
   "apps": [
     {
-      "serverURL": "https://my-parse-app.herokuapp.com/parse",
+      "serverURL": "http://localhost:1337/parse",
       "appId": "myAppId",
       "masterKey": "myMasterKey",
       "appName": "MyParseApp"
