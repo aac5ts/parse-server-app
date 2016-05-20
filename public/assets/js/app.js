@@ -1,7 +1,7 @@
 
 Parse.initialize("myAppId");
-Parse.serverURL = 'http://my-parse-app.herokuapp.com/parse'
-//Parse.serverURL = 'http://localhost:1337/parse'
+//Parse.serverURL = 'http://my-parse-app.herokuapp.com/parse'
+Parse.serverURL = 'http://localhost:1337/parse'
 
 var ChatMessage = Parse.Object.extend("ChatMessage");
 var Profile = Parse.Object.extend("Profile");
@@ -11,6 +11,8 @@ let subscription = query.subscribe();
 
 if(localStorage.profileName) {
   showChat();
+} else {
+  hideClearProfileButton();
 }
 
 $('#send-chat-button').click(function(){
@@ -25,6 +27,13 @@ $('#chat-input').keyup(function (e) {
 
 $('#submit-profile-button').click(function(){
     submitProfile();
+});
+
+$("#clear-profile-button").click(function(){
+   localStorage.removeItem("profileName");
+   localStorage.removeItem("profileSchool");
+   hideClearProfileButton();
+   $("#chat-panel-title").html("Hey, you! Make sure to enter a profile to start chatting!");
 });
 
 $('#nav-welcome').click(function(){
@@ -58,11 +67,20 @@ function submitProfile() {
         localStorage.setItem("profileSchool", school);
         
         showChat();
+        showClearProfileButton();
       },
     error: function(profile, error) {
         alert("Make sure to enter a valid profile!!");
     }
   });
+}
+
+function showClearProfileButton() {
+  $("#clear-profile-button").show();
+}
+
+function hideClearProfileButton() {
+  $("#clear-profile-button").hide();
 }
 
 function showChat() {
@@ -87,11 +105,14 @@ function sendMessage() {
     var message = $('#chat-input').val();
     $('#chat-input').val('');
     
-    if (myProfile) {
+    if (localStorage.profileName) {
+      var name = localStorage.getItem("profileName");
+      var school = localStorage.getItem("profileSchool");
+      
       var chatMessage = new ChatMessage();
       chatMessage.set("message", message);
-      chatMessage.set("name", myProfile.get("name"));
-      chatMessage.set("school", myProfile.get("school"));
+      chatMessage.set("name", name);
+      chatMessage.set("school", school);
       
       saveMessage(chatMessage)
     } else {
