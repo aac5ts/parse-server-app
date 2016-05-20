@@ -9,7 +9,7 @@ var Profile = Parse.Object.extend("Profile");
 let query = new Parse.Query('ChatMessage');
 let subscription = query.subscribe();
 
-if(localStorage.profileName) {
+if(sessionStorage.profileName) {
   showChat();
 } else {
   hideClearProfileButton();
@@ -30,8 +30,8 @@ $('#submit-profile-button').click(function(){
 });
 
 $("#clear-profile-button").click(function(){
-   localStorage.removeItem("profileName");
-   localStorage.removeItem("profileSchool");
+   sessionStorage.removeItem("profileName");
+   sessionStorage.removeItem("profileSchool");
    hideClearProfileButton();
    $("#chat-panel-title").html("Hey, you! Make sure to enter a profile to start chatting!");
 });
@@ -63,8 +63,8 @@ function submitProfile() {
         $('#profile-name-input').val('');
         $('#profile-school-input').val('');
         
-        localStorage.setItem("profileName", name);
-        localStorage.setItem("profileSchool", school);
+        sessionStorage.setItem("profileName", name);
+        sessionStorage.setItem("profileSchool", school);
         
         showChat();
         showClearProfileButton();
@@ -86,9 +86,9 @@ function hideClearProfileButton() {
 function showChat() {
   $("#chat-history-table-body").empty();
   
-  if(localStorage.profileName) {
-    var name = localStorage.getItem("profileName");
-    var school = localStorage.getItem("profileSchool");
+  if(sessionStorage.profileName) {
+    var name = sessionStorage.getItem("profileName");
+    var school = sessionStorage.getItem("profileSchool");
     $("#chat-panel-title").html("Hey, " + name + "! You can start chatting!");
     console.log("Current Profile: " + name + " from " + school);
   }
@@ -105,9 +105,9 @@ function sendMessage() {
     var message = $('#chat-input').val();
     $('#chat-input').val('');
     
-    if (localStorage.profileName) {
-      var name = localStorage.getItem("profileName");
-      var school = localStorage.getItem("profileSchool");
+    if (sessionStorage.profileName) {
+      var name = sessionStorage.getItem("profileName");
+      var school = sessionStorage.getItem("profileSchool");
       
       var chatMessage = new ChatMessage();
       chatMessage.set("message", message);
