@@ -9,7 +9,7 @@ var Profile = Parse.Object.extend("Profile");
 let query = new Parse.Query('ChatMessage');
 let subscription = query.subscribe();
 
-if(sessionStorage.profileName) {
+if(doesProfileExist()) {
   showChat();
 } else {
   hideClearProfileButton();
@@ -93,26 +93,27 @@ function submitProfile() {
 function showChat() {
   $("#chat-history-table-body").empty();
   
-  if(sessionStorage.profileName) {
+  if(doesProfileExist()) {
     var name = sessionStorage.getItem("profileName");
     var school = sessionStorage.getItem("profileSchool");
+    
     $("#chat-panel-title").html("Hey, " + name + "! You can start chatting!");
     console.log("Current Profile: " + name + " from " + school);
   }
   
-   fetchMessages();
+  fetchMessages();
    
-   $("#welcome").hide();
-   $("#chat").show();
-   $('#nav-chat').parent('li').addClass('active');
-   $('#nav-welcome').parent('li').removeClass('active');
+  $("#welcome").hide();
+  $("#chat").show();
+  $('#nav-chat').parent('li').addClass('active');
+  $('#nav-welcome').parent('li').removeClass('active');
 }
 
 function sendMessage() {
     var message = $('#chat-input').val();
     $('#chat-input').val('');
     
-    if (sessionStorage.profileName) {
+    if (doesProfileExist()) {
       var name = sessionStorage.getItem("profileName");
       var school = sessionStorage.getItem("profileSchool");
       
