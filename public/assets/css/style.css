@@ -6,3 +6,7 @@ body {
 .link:hover {
     text-decoration: underline;
 }
+
+.navbar-btn {
+  margin-right: 10px;
+}
