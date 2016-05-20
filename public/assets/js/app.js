@@ -12,7 +12,6 @@ let subscription = query.subscribe();
 if(localStorage.profileName) {
   showChat();
 }
-  
 
 $('#send-chat-button').click(function(){
     sendMessage();
@@ -31,9 +30,6 @@ $('#submit-profile-button').click(function(){
 $('#nav-welcome').click(function(){
     $('#welcome').show();
     $('#nav-welcome').parent('li').addClass('active');
-
-    $('#profiles').hide();
-    $('#nav-profiles').parent('li').removeClass('active');
 
     $('#chat').hide();
     $('#nav-chat').parent('li').removeClass('active');
@@ -82,10 +78,8 @@ function showChat() {
    fetchMessages();
    
    $("#welcome").hide();
-   $("#profiles").hide();
    $("#chat").show();
    $('#nav-chat').parent('li').addClass('active');
-   $('#nav-profiles').parent('li').removeClass('active');
    $('#nav-welcome').parent('li').removeClass('active');
 }
 
