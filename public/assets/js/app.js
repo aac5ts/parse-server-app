@@ -8,6 +8,10 @@ var Profile = Parse.Object.extend("Profile");
 
 let query = new Parse.Query('ChatMessage');
 let subscription = query.subscribe();
+
+if(localStorage.profileName) {
+  showChat();
+}
   
 
 $('#send-chat-button').click(function(){
