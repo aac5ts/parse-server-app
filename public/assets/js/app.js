@@ -69,8 +69,10 @@ function showChat() {
   $("#chat-history-table-body").empty();
   
   if(localStorage.profileName) {
-    $("#chat-panel-title").html("Hey, " + myProfile.get("name") + "! You can start chatting!");
-    console.log("Current Profile: " + localStorage.getItem("profileName") + " from " + ocalStorage.getItem("profileSchool"));
+    var name = localStorage.getItem("profileName");
+    var school = localStorage.getItem("profileSchool");
+    $("#chat-panel-title").html("Hey, " + name + "! You can start chatting!");
+    console.log("Current Profile: " + name + " from " + school);
   }
   
    fetchMessages();
