@@ -3,6 +3,7 @@
 var Parse = require('parse');
 var express = require('express');
 var ParseServer = require('parse-server').ParseServer;
+var ParseDashboard = require('parse-dashboard');
 var path = require('path');
 
 var databaseUri = process.env.DATABASE_URI || process.env.MONGOLAB_URI;
@@ -22,6 +23,17 @@ var api = new ParseServer({
   }
 });
 
+var dashboard = new ParseDashboard({
+  "apps": [
+    {
+      "serverURL": "http://my-parse-app.herokuapp.com/parse",
+      "appId": "myAppId",
+      "masterKey": "myMasterKey",
+      "appName": "MyParseApp"
+    }
+  ]
+});
+
 var app = express();
 
 // Serve static assets from the /public folder
@@ -31,9 +43,12 @@ app.use('/public', express.static(path.join(__dirname, '/public')));
 var mountPath = process.env.PARSE_MOUNT || '/parse';
 app.use(mountPath, api);
 
+// make the Parse Dashboard available at /dashboard
+app.use('/dashboard', dashboard);
+
 // Parse Server plays nicely with the rest of your web routes
 app.get('/', function(req, res) {
-  res.status(200).send('Welcome to Alexandra\'s Parse Server!');
+  res.status(200).send('Welcome to your Parse Server!');
 });
 
 // There will be a test page available on the /test path of your server 
@@ -49,7 +64,7 @@ app.get('/home', function(req, res) {
 var port = process.env.PORT || 1337;
 var httpServer = require('http').createServer(app);
 httpServer.listen(port, function() {
-    console.log('alexandra-parse-server running on port ' + port + '.');
+    console.log('my-parse-app running on port ' + port + '.');
 });
 // This will enable the Live Query real-time server
 var liveQueryServer = ParseServer.createLiveQueryServer(httpServer);
