@@ -1,6 +1,6 @@
 
 //If you change your app Id, update it here
-Parse.initialize("myAppId");
+Parse.initialize("");
 //Fill in your server URL here
 Parse.serverURL = 'http://my-parse-app.herokuapp.com/parse'
 
