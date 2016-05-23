@@ -18,7 +18,7 @@ var api = new ParseServer({
   masterKey: process.env.MASTER_KEY || 'myMasterKey', 
   serverURL: process.env.SERVER_URL || 'http://localhost:1337/parse',  
   liveQuery: {
-    classNames: [ 'ChatMessage' ] // List of classes to support for query subscriptions
+    classNames: [ 'ChatMessage', 'Profile' ] // List of classes to support for query subscriptions
   }
 });
 
