@@ -2,16 +2,13 @@
 //If you change your app Id, update it here
 Parse.initialize("myAppId");
 //Fill in your server URL here
-Parse.serverURL = ''
+Parse.serverURL = 'http://my-parse-app.herokuapp.com/home'
 
 var ChatMessage = Parse.Object.extend("ChatMessage");
 var Profile = Parse.Object.extend("Profile");
 
 let query = new Parse.Query('ChatMessage');
 let subscription = query.subscribe();
-
-let queryProfile = new Parse.Query('Profile');
-let subscriptionProfile = query.subscribe();
 
 if(doesProfileExist()) {
   showChat();
@@ -190,20 +187,4 @@ subscription.on('create', (object) => {
   var message = object.get('message');
   console.log(message);
   prependMessage(object);
-});
-
-subscriptionProfile.on('open', () => {
-  console.log('Subscription Profile opened');
-});
-  
-subscriptionProfile.on('create', (object) => {
-  console.log("Profile created");
-});
-
-subscriptionProfile.on('close', (object) => {
-  console.log('Subscription Profile closed');
-});
-
-subscription.on('delete', (object) => {
-  console.log('Profile deleted');
 });
