@@ -1,7 +1,6 @@
 
-Parse.initialize("myAppId");
+Parse.initialize("myParseAppId");
 Parse.serverURL = 'http://my-parse-app.herokuapp.com/parse'
-//Parse.serverURL = 'http://localhost:1337/parse'
 
 var ChatMessage = Parse.Object.extend("ChatMessage");
 var Profile = Parse.Object.extend("Profile");
